@@ -30,6 +30,9 @@ Citizen.CreateThread(function()
                     local currentPos = GetEntityCoords(playerPed)
                     if not IsEntityPlayingAnim(playerPed, 'mini@repair', 'fixing_a_ped', 3) or IsPedInAnyVehicle(playerPed, false) or Vdist(initialPos, currentPos) > 1.0 then
                         exports['okokNotify']:Alert("Vehicle Repair", "Voertuig reparatie gestopt!", 5000, 'error')
+                        if Config.Debug then
+                            print("^0[^1DEBUG^0] Stopped repair process due to abuse.")
+                        end
                         repairCancelled = true
                         break
                     end
@@ -41,15 +44,24 @@ Citizen.CreateThread(function()
                 if not repairCancelled then
                     SetVehicleFixed(vehicle)
                     exports['okokNotify']:Alert("Vehicle Repair", "Jouw voertuig is gerepareerd!", 5000, 'success')
+                    if Config.Debug then
+                        print("^0[^1DEBUG^0] Succesfully repaired vehicle.")
+                    end
                     SetVehicleDoorsShut(vehicle, false) 
                 else
                     SetVehicleDoorShut(vehicle, 4, false) 
                 end
             else
                 exports['okokNotify']:Alert("Vehicle Repair", "Je moet dichterbij het voertuig staan.", 5000, 'error')
+                if Config.Debug then
+                    print("^0[^1DEBUG^0] Player has to be closer to the vehicle.")
+                end
             end
         else
             exports['okokNotify']:Alert("Vehicle Repair", "Geen voertuig in de buurt", 5000, 'error')
+            if Config.Debug then
+                print("^0[^1DEBUG^0] No vehicle find near player.")
+            end
         end
     end)
 end)

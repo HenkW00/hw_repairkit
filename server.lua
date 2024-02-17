@@ -29,6 +29,9 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
                     xPlayer.removeInventoryItem(Config.ItemName, 1)
                 elseif Config.Inventory == 'ox_inventory' then
                     TriggerEvent('ox_inventory:removeItem', source, Config.ItemName, 1)
+                    if Config.Debug then
+                        print("^0[^1DEBUG^0] Script has removed a repairkit from player inventory.")
+                    end
                 end
                 TriggerClientEvent('hw_repairkit:repairVehicle', source)
             else
