@@ -34,6 +34,9 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
                     end
                 end
                 TriggerClientEvent('hw_repairkit:repairVehicle', source)
+                if Config.Debug then
+                    print("^0[^1DEBUG^0] Player started the repair process.")
+                end
             else
                 xPlayer.showNotification('~r~You do not have a repair kit.')
             end
