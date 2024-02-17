@@ -10,7 +10,7 @@ Citizen.CreateThread(function()
 
             if Vdist(initialPos, vehiclePos) < 3.0 then
                 if Config.Debug then
-                    print("hw_repairkit: Starting repair process.")
+                    print("^0[^1DEBUG^0] Starting repair process.")
                 end
 
                 FreezeEntityPosition(playerPed, true)

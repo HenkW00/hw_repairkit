@@ -37,11 +37,11 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
         else
             xPlayer.showNotification('~r~There are enough mechanics online. Please contact one for repairs.')
             if Config.Debug then
-                print(('hw_repairkit: %s attempted to use a repair kit but %s mechanics are online.'):format(xPlayer.getIdentifier(), mechanicsOnline))
+                print(('^0[^1DEBUG^0] %s attempted to use a repair kit but %s mechanics are online.'):format(xPlayer.getIdentifier(), mechanicsOnline))
             end
         end
     else
-        print("Failed to retrieve player object for source:", source)
+        print("^0[^1DEBUG^0] Failed to retrieve player object for source:^3", source)
     end
 end)
 
@@ -52,6 +52,6 @@ AddEventHandler('ox_inventory:removeItem', function(source, itemName, amount)
     if xPlayer then
         xPlayer.removeInventoryItem(itemName, amount)
     else
-        print("Failed to retrieve player object for source:", source)
+        print("^0[^1DEBUG^0] Failed to retrieve player object for source:^3", source)
     end
 end)
