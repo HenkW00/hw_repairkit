@@ -9,9 +9,9 @@ ESX = exports["es_extended"]:getSharedObject()
 function CountMechanicsOnline()
     local count = 0
     local players = ESX.GetPlayers()
-    for i=1, #players, 1 do
+    for i = 1, #players, 1 do
         local xPlayer = ESX.GetPlayerFromId(players[i])
-        if xPlayer.job.name == Config.MechanicJob then
+        if xPlayer and xPlayer.job.name == Config.MechanicJob then
             count = count + 1
         end
     end
@@ -24,7 +24,7 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
         local mechanicsOnline = CountMechanicsOnline()
         if mechanicsOnline < Config.RequiredMechanicsOnline then
             local hasRepairKit = xPlayer.getInventoryItem(Config.ItemName)
-            if hasRepairKit.count > 0 then
+            if hasRepairKit and hasRepairKit.count > 0 then
                 if Config.Inventory == 'normal' then
                     xPlayer.removeInventoryItem(Config.ItemName, 1)
                 elseif Config.Inventory == 'ox_inventory' then
@@ -41,10 +41,9 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
             end
         end
     else
-        print("^0[^1DEBUG^0] Failed to retrieve player object for source:^3", source)
+        print("^0[^1DEBUG^0] Failed to retrieve player object for source: " .. tostring(source))
     end
 end)
-
 
 RegisterNetEvent('ox_inventory:removeItem')
 AddEventHandler('ox_inventory:removeItem', function(source, itemName, amount)
@@ -52,6 +51,7 @@ AddEventHandler('ox_inventory:removeItem', function(source, itemName, amount)
     if xPlayer then
         xPlayer.removeInventoryItem(itemName, amount)
     else
-        print("^0[^1DEBUG^0] Failed to retrieve player object for source:^3", source)
+        print("^0[^1DEBUG^0] Failed to retrieve player object for source: " .. tostring(source))
     end
 end)
+
