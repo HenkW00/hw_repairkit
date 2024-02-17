@@ -13,7 +13,6 @@ Citizen.CreateThread(function()
                     print("hw_repairkit: Starting repair process.")
                 end
 
-                -- Freeze the player and play the repair animation
                 FreezeEntityPosition(playerPed, true)
                 ESX.Streaming.RequestAnimDict('mini@repair', function()
                     TaskPlayAnim(playerPed, 'mini@repair', 'fixing_a_ped', 8.0, -8, -1, 49, 0, false, false, false)
@@ -24,7 +23,7 @@ Citizen.CreateThread(function()
                 local endTime = GetGameTimer() + Config.RepairTime
                 local repairCancelled = false
                 while GetGameTimer() < endTime do
-                    Citizen.Wait(100) -- Short wait to reduce script load
+                    Citizen.Wait(100)
                     local currentPos = GetEntityCoords(playerPed)
                     if not IsEntityPlayingAnim(playerPed, 'mini@repair', 'fixing_a_ped', 3) or IsPedInAnyVehicle(playerPed, false) or Vdist(initialPos, currentPos) > 1.0 then
                         exports['okokNotify']:Alert("Vehicle Repair", "Voertuig reparatie gestopt!", 5000, 'error')
@@ -33,7 +32,6 @@ Citizen.CreateThread(function()
                     end
                 end
 
-                -- Cleanup: stop the animation, unfreeze the player, and either complete or cancel the repair
                 ClearPedTasks(playerPed)
                 FreezeEntityPosition(playerPed, false)
 

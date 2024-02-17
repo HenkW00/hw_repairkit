@@ -41,7 +41,7 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
             end
         end
     else
-        print("Failed to retrieve player object for source:", source) -- Debugging statement
+        print("Failed to retrieve player object for source:", source)
     end
 end)
 
@@ -52,6 +52,6 @@ AddEventHandler('ox_inventory:removeItem', function(source, itemName, amount)
     if xPlayer then
         xPlayer.removeInventoryItem(itemName, amount)
     else
-        print("Failed to retrieve player object for source:", source) -- Debugging statement
+        print("Failed to retrieve player object for source:", source)
     end
 end)
