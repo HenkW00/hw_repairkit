@@ -3,7 +3,7 @@ game 'gta5'
 
 description 'Repair Kit script with okokNotify integration'
 author 'HenkW'
-version '1.1.4'
+version '1.1.5'
 
 client_script 'client.lua'
 server_script 'server.lua'

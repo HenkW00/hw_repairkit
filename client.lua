@@ -14,6 +14,9 @@ Citizen.CreateThread(function()
                 end
 
                 FreezeEntityPosition(playerPed, true)
+                
+                SetVehicleDoorOpen(vehicle, 4, false, false)
+
                 ESX.Streaming.RequestAnimDict('mini@repair', function()
                     TaskPlayAnim(playerPed, 'mini@repair', 'fixing_a_ped', 8.0, -8, -1, 49, 0, false, false, false)
                 end)
@@ -38,6 +41,9 @@ Citizen.CreateThread(function()
                 if not repairCancelled then
                     SetVehicleFixed(vehicle)
                     exports['okokNotify']:Alert("Vehicle Repair", "Jouw voertuig is gerepareerd!", 5000, 'success')
+                    SetVehicleDoorsShut(vehicle, false) 
+                else
+                    SetVehicleDoorShut(vehicle, 4, false) 
                 end
             else
                 exports['okokNotify']:Alert("Vehicle Repair", "Je moet dichterbij het voertuig staan.", 5000, 'error')
@@ -47,5 +53,3 @@ Citizen.CreateThread(function()
         end
     end)
 end)
-
-
