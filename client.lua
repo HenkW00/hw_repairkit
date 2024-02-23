@@ -14,6 +14,7 @@ Citizen.CreateThread(function()
                 end
 
                 FreezeEntityPosition(playerPed, true)
+                
                 SetVehicleDoorOpen(vehicle, 4, false, false)
 
                 ESX.Streaming.RequestAnimDict('mini@repair', function()
@@ -44,13 +45,11 @@ Citizen.CreateThread(function()
                     SetVehicleFixed(vehicle)
                     exports['okokNotify']:Alert("Vehicle Repair", "Jouw voertuig is gerepareerd!", 5000, 'success')
                     if Config.Debug then
-                        print("^0[^1DEBUG^0] Successfully repaired vehicle.")
+                        print("^0[^1DEBUG^0] Succesfully repaired vehicle.")
                     end
-                    SetVehicleDoorsShut(vehicle, false)
-                    -- Signal the server that the repair was successful
-                    TriggerServerEvent('hw_repairkit:successfulRepair')
+                    SetVehicleDoorsShut(vehicle, false) 
                 else
-                    SetVehicleDoorShut(vehicle, 4, false)
+                    SetVehicleDoorShut(vehicle, 4, false) 
                 end
             else
                 exports['okokNotify']:Alert("Vehicle Repair", "Je moet dichterbij het voertuig staan.", 5000, 'error')
