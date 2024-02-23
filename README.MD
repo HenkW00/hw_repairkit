@@ -8,8 +8,7 @@ This is a repairkit script with ox_inventory support and okokNotify support
 - HW Development | HenkW
 
 **Changelog:**
-- Cleaned server and client code
-- Changed debug prints
+- Fixed repairkit remove on cancel or fail!
 
 🛠 **Requirements**
 - ESX Server

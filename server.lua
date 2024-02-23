@@ -6,6 +6,7 @@ TriggerEvent('esx:getSharedObject', function(obj)
     ESX = obj
 end)
 
+
 function CountMechanicsOnline()
     local count = 0
     local players = ESX.GetPlayers()
@@ -25,14 +26,6 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
         if mechanicsOnline < Config.RequiredMechanicsOnline then
             local hasRepairKit = xPlayer.getInventoryItem(Config.ItemName)
             if hasRepairKit and hasRepairKit.count > 0 then
-                if Config.Inventory == 'normal' then
-                    xPlayer.removeInventoryItem(Config.ItemName, 1)
-                elseif Config.Inventory == 'ox_inventory' then
-                    TriggerEvent('ox_inventory:removeItem', source, Config.ItemName, 1)
-                    if Config.Debug then
-                        print("^0[^1DEBUG^0] Script has removed a repairkit from player inventory.")
-                    end
-                end
                 TriggerClientEvent('hw_repairkit:repairVehicle', source)
                 if Config.Debug then
                     print("^0[^1DEBUG^0] Player started the repair process.")
@@ -51,13 +44,16 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
     end
 end)
 
-RegisterNetEvent('ox_inventory:removeItem')
-AddEventHandler('ox_inventory:removeItem', function(source, itemName, amount)
-    local xPlayer = ESX.GetPlayerFromId(source)
+RegisterNetEvent('hw_repairkit:removeRepairKit')
+AddEventHandler('hw_repairkit:removeRepairKit', function()
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
     if xPlayer then
-        xPlayer.removeInventoryItem(itemName, amount)
+        xPlayer.removeInventoryItem(Config.ItemName, 1)
+        if Config.Debug then
+            print("^0[^1DEBUG^0] Removed a repair kit from player inventory after successful repair.")
+        end
     else
-        print("^0[^1DEBUG^0] Failed to retrieve player object for source: " .. tostring(source))
+        print("^0[^1DEBUG^0] Failed to remove repair kit from player: " .. tostring(_source))
     end
 end)
-
