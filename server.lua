@@ -6,6 +6,7 @@ ESX = exports["es_extended"]:getSharedObject()
 --     ESX = obj
 -- end)
 
+
 function CountMechanicsOnline()
     local count = 0
     local players = ESX.GetPlayers()
@@ -20,44 +21,26 @@ end
 
 ESX.RegisterUsableItem(Config.ItemName, function(source)
     local xPlayer = ESX.GetPlayerFromId(source)
-    if xPlayer then
-        local mechanicsOnline = CountMechanicsOnline()
-        if mechanicsOnline < Config.RequiredMechanicsOnline then
-            local hasRepairKit = xPlayer.getInventoryItem(Config.ItemName)
-            if hasRepairKit and hasRepairKit.count > 0 then
-                if Config.Inventory == 'normal' then
-                    xPlayer.removeInventoryItem(Config.ItemName, 1)
-                elseif Config.Inventory == 'ox_inventory' then
-                    TriggerEvent('ox_inventory:removeItem', source, Config.ItemName, 1)
-                    if Config.Debug then
-                        print("^0[^1DEBUG^0] Script has removed a repairkit from player inventory.")
-                    end
-                end
-                TriggerClientEvent('hw_repairkit:repairVehicle', source)
-                if Config.Debug then
-                    print("^0[^1DEBUG^0] Player started the repair process.")
-                end
-            else
-                xPlayer.showNotification('~r~You do not have a repair kit.')
-            end
-        else
-            xPlayer.showNotification('~r~There are enough mechanics online. Please contact one for repairs.')
-            if Config.Debug then
-                print(('^0[^1DEBUG^0] %s attempted to use a repair kit but %s mechanics are online.'):format(xPlayer.getIdentifier(), mechanicsOnline))
-            end
-        end
+    local mechanicsOnline = CountMechanicsOnline()
+    if mechanicsOnline < Config.RequiredMechanicsOnline then
+        TriggerClientEvent('hw_repairkit:startRepair', source)
     else
-        print("^0[^1DEBUG^0] Failed to retrieve player object for source: " .. tostring(source))
+        xPlayer.showNotification('~r~There are enough mechanics online. Please contact one for repairs.')
+        if Config.Debug then
+            print(('^0[^1DEBUG^0] %s attempted to use a repair kit but %s mechanics are online.'):format(xPlayer.getIdentifier(), mechanicsOnline))
+        end
     end
 end)
 
-RegisterNetEvent('ox_inventory:removeItem')
-AddEventHandler('ox_inventory:removeItem', function(source, itemName, amount)
+RegisterNetEvent('hw_repairkit:successfulRepair')
+AddEventHandler('hw_repairkit:successfulRepair', function()
     local xPlayer = ESX.GetPlayerFromId(source)
     if xPlayer then
-        xPlayer.removeInventoryItem(itemName, amount)
-    else
-        print("^0[^1DEBUG^0] Failed to retrieve player object for source: " .. tostring(source))
+        xPlayer.removeInventoryItem(Config.ItemName, 1)
+        if Config.Debug then
+            print("^0[^1DEBUG^0] Repair kit removed from player inventory after successful repair.")
+        end
     end
 end)
+
 
