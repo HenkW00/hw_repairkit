@@ -68,7 +68,7 @@ local resourceName = "hw_repairkit"
         print('^7> ^5[HW Scripts] ^7| ^6Made by HW Development')
         print('^7> ^5[HW Scripts] ^7| ^8Creator: ^3Henk W')
         print('^7> ^5[HW Scripts] ^7| ^4Github: ^3https://github.com/HenkW00')
-        print('^7> ^5[HW Scripts] ^7| ^4Discord Server Link: ^3https://discord.gg/j55z45bC')
+        print('^7> ^5[HW Scripts] ^7| ^4Discord Server Link: ^3https://discord.gg/buqhWxVYkQ')
         print('^7> ================================================================')
     end)
     
