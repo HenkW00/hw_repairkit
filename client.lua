@@ -1,3 +1,6 @@
+---------------
+---MAIN LOOP---
+---------------
 Citizen.CreateThread(function()
     RegisterNetEvent('hw_repairkit:repairVehicle')
     AddEventHandler('hw_repairkit:repairVehicle', function()
@@ -10,7 +13,7 @@ Citizen.CreateThread(function()
 
             if Vdist(initialPos, vehiclePos) < 3.0 then
                 if Config.Debug then
-                    print("^0[^1DEBUG^0] Starting repair process.")
+                    print("^0[^1DEBUG^0] ^5Starting repair process.")
                 end
 
                 FreezeEntityPosition(playerPed, true)
@@ -40,9 +43,9 @@ Citizen.CreateThread(function()
                     SetVehicleFixed(vehicle)
                     exports['okokNotify']:Alert("Vehicle Repair", "Jouw voertuig is gerepareerd!", 5000, 'success')
                     SetVehicleDoorsShut(vehicle, false)
-                    TriggerServerEvent('hw_repairkit:removeRepairKit') -- Removes the repair kit on successful repair
+                    TriggerServerEvent('hw_repairkit:removeRepairKit')
                     if Config.Debug then
-                        print("^0[^1DEBUG^0] Successfully repaired vehicle and removed repair kit.")
+                        print("^0[^1DEBUG^0] ^5Successfully repaired vehicle and removed repair kit.")
                     end
                 else
                     SetVehicleDoorShut(vehicle, 4, false)

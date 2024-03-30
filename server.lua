@@ -7,6 +7,9 @@ TriggerEvent('esx:getSharedObject', function(obj)
 end)
 
 
+---------------
+---JOB COUNT---
+---------------
 function CountMechanicsOnline()
     local count = 0
     local players = ESX.GetPlayers()
@@ -19,6 +22,9 @@ function CountMechanicsOnline()
     return count
 end
 
+--------------
+---USE ITEM---
+--------------
 ESX.RegisterUsableItem(Config.ItemName, function(source)
     local xPlayer = ESX.GetPlayerFromId(source)
     if xPlayer then
@@ -28,7 +34,7 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
             if hasRepairKit and hasRepairKit.count > 0 then
                 TriggerClientEvent('hw_repairkit:repairVehicle', source)
                 if Config.Debug then
-                    print("^0[^1DEBUG^0] Player started the repair process.")
+                    print("^0[^1DEBUG^0] ^5Player started the repair process.")
                 end
             else
                 xPlayer.showNotification('~r~You do not have a repair kit.')
@@ -36,14 +42,17 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
         else
             xPlayer.showNotification('~r~There are enough mechanics online. Please contact one for repairs.')
             if Config.Debug then
-                print(('^0[^1DEBUG^0] %s attempted to use a repair kit but %s mechanics are online.'):format(xPlayer.getIdentifier(), mechanicsOnline))
+                print(('^0[^1DEBUG^0] ^1%s ^5attempted to use a repair kit but %s mechanics are online.'):format(xPlayer.getIdentifier(), mechanicsOnline))
             end
         end
     else
-        print("^0[^1DEBUG^0] Failed to retrieve player object for source: " .. tostring(source))
+        print("^0[^1DEBUG^0] ^5Failed to retrieve player object for source: " .. tostring(source))
     end
 end)
 
+----------------
+---REMOVE KIT---
+----------------
 RegisterNetEvent('hw_repairkit:removeRepairKit')
 AddEventHandler('hw_repairkit:removeRepairKit', function()
     local _source = source
@@ -51,9 +60,9 @@ AddEventHandler('hw_repairkit:removeRepairKit', function()
     if xPlayer then
         xPlayer.removeInventoryItem(Config.ItemName, 1)
         if Config.Debug then
-            print("^0[^1DEBUG^0] Removed a repair kit from player inventory after successful repair.")
+            print("^0[^1DEBUG^0] ^5Removed a repair kit from player inventory after successful repair.")
         end
     else
-        print("^0[^1DEBUG^0] Failed to remove repair kit from player: " .. tostring(_source))
+        print("^0[^1DEBUG^0] ^5Failed to remove repair kit from player: " .. tostring(_source))
     end
 end)
