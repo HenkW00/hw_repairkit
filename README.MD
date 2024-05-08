@@ -1,14 +1,18 @@
 # HW Scripts - Repairkit
 
 **Description**
-
 This is a repairkit script with ox_inventory support and okokNotify support
 
 **Author**
 - HW Development | HenkW
 
 **Changelog:**
-- Fixed repairkit remove on cancel or fail!
+- Added lib locale to client and server
+- Added locales to okokNotify exports
+- Added locales/json with EN, DE, FR and NL as default
+- Added a option in config.lua to change notify style
+- Rewrote client.lua for more performance
+- Rewrote server.lue for more performance
 
 🛠 **Requirements**
 - ESX Server

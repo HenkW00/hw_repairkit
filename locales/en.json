@@ -1,0 +1,9 @@
+{
+    "repairing": "Repairing vehicle...",
+    "cancel_repair": "Canceled the repair!",
+    "repair_succesfully": "Youre vehicle has been repaired.",
+    "not_close": "You have to be closer to the vehicle...",
+    "no_vehicle_nearby": "No vehicle nearby...",
+    "no_repairkit": "You do not have a repair kit",
+    "not_enough_mechanics": "There are enough mechanics online. Please contact one for repairs.",
+}

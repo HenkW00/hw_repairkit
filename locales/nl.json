@@ -1,0 +1,9 @@
+{
+    "repairing": "Voertuig wordt gerepareerd...",
+    "cancel_repair": "Reparatie geannuleerd!",
+    "repair_succesfully": "Je voertuig is gerepareerd.",
+    "not_close": "Je moet dichter bij het voertuig staan...",
+    "no_vehicle_nearby": "Geen voertuig in de buurt...",
+    "no_repairkit": "Je hebt geen reparatiekit",
+    "not_enough_mechanics": "Er zijn voldoende monteurs online. Neem contact op met een van hen."
+}

@@ -1,0 +1,9 @@
+{
+    "repairing": "Fahrzeug wird repariert...",
+    "cancel_repair": "Reparatur abgebrochen!",
+    "repair_succesfully": "Ihr Fahrzeug wurde repariert.",
+    "not_close": "Sie müssen näher am Fahrzeug sein...",
+    "no_vehicle_nearby": "Kein Fahrzeug in der Nähe...",
+    "no_repairkit": "Sie haben keinen Reparatursatz",
+    "not_enough_mechanics": "Es sind genug Mechaniker online. Bitte kontaktieren Sie einen."
+}

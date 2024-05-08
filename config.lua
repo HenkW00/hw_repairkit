@@ -3,7 +3,7 @@ Config = {}
 --------------
 -----UTILS----
 --------------
-Config.CheckForUpdates = true -- Recommended to leave on 'true'
+Config.checkForUpdates = true -- Recommended to leave on 'true'
 Config.Debug = true -- For debugging purposes
 
 ---------------
@@ -22,3 +22,8 @@ Config.RequiredMechanicsOnline = 2 -- Number of mechanics needed online to disab
 ----REPAIR----
 --------------
 Config.RepairTime = 15000 -- Time in milliseconds it takes to repair the vehicle
+
+--------------
+----NOTIFY----
+--------------
+Config.Notify = 'ox_lib' -- Use either 'okokNotify' or 'ox_lib' for the notifycation style

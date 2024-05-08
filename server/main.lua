@@ -1,11 +1,12 @@
--- ESX = exports["es_extended"]:getSharedObject()
+lib.locale()
+ESX = exports["es_extended"]:getSharedObject()
 
-ESX = nil
-
-TriggerEvent('esx:getSharedObject', function(obj)
-    ESX = obj
-end)
-
+--------------
+----NOTIFY----
+--------------
+local function sendNotification(playerId, message, type, position)
+    TriggerClientEvent('hw_repairkit:displayNotification', playerId, message, type, position)
+end
 
 ---------------
 ---JOB COUNT---
@@ -37,10 +38,18 @@ ESX.RegisterUsableItem(Config.ItemName, function(source)
                     print("^0[^1DEBUG^0] ^5Player started the repair process.")
                 end
             else
+                if Config.Notify == 'okokNotify' then
                 xPlayer.showNotification('~r~You do not have a repair kit.')
+                elseif Config.Notify == 'ox_lib' then
+                    sendNotification(source, locale('no_repairkit'), 'error', 'top-left')
+                end
             end
         else
+            if Config.Notify == 'okokNotify' then
             xPlayer.showNotification('~r~There are enough mechanics online. Please contact one for repairs.')
+            elseif Config.Notify == 'ox_lib' then
+                sendNotification(source, locale('not_enough_mechanics'), 'info', 'top-left')
+            end
             if Config.Debug then
                 print(('^0[^1DEBUG^0] ^1%s ^5attempted to use a repair kit but %s mechanics are online.'):format(xPlayer.getIdentifier(), mechanicsOnline))
             end
@@ -55,14 +64,14 @@ end)
 ----------------
 RegisterNetEvent('hw_repairkit:removeRepairKit')
 AddEventHandler('hw_repairkit:removeRepairKit', function()
-    local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
+    local source = source
+    local xPlayer = ESX.GetPlayerFromId(source)
     if xPlayer then
         xPlayer.removeInventoryItem(Config.ItemName, 1)
         if Config.Debug then
             print("^0[^1DEBUG^0] ^5Removed a repair kit from player inventory after successful repair.")
         end
     else
-        print("^0[^1DEBUG^0] ^5Failed to remove repair kit from player: " .. tostring(_source))
+        print("^0[^1DEBUG^0] ^5Failed to remove repair kit from player: " .. tostring(source))
     end
 end)

@@ -1,16 +1,40 @@
 fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
 description 'Repair Kit script with okokNotify integration'
 author 'HenkW'
-version '1.2.4'
+version '1.2.6'
 
-client_script 'client.lua'
-server_script 'server.lua'
-server_script 'version.lua'
+files {
+    'locales/*.json'
+}
 
-shared_script 'config.lua'
+client_scripts {
+    'client/main.lua'
+}
 
-dependency 'okokNotify'
+server_scripts {
+    '@mysql-async/lib/MySQL.lua',
+    'server/main.lua',
+    'server/version.lua'
+}
 
-shared_script '@es_extended/imports.lua'
+shared_scripts {
+    '@es_extended/imports.lua',
+    'config.lua',
+    '@ox_lib/init.lua'
+}
+
+dependencies {
+    -- 'okokNotify',
+    'ox_lib',
+    'hw_utils'
+}
+
+escrow_ignore {
+    'config.lua',
+    'locales/*.json',
+    'fxmanifest.lua',
+    'README.MD'
+}
